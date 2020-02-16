@@ -21,14 +21,13 @@ public class EndOfPlatFormCollider : MonoBehaviour
         {
             //Subtract players score or trigger platform explode.
             // check enemy orgin portal to see which platform to destroy.
-            if (collision.gameObject.GetComponent<Enemies>().portalOrigin == Enemies.PortalOrigins.left) 
+            if (collision.gameObject.GetComponent<Enemies>().portalOrigin == Enemies.PortalOrigins.left && gameManager.leftPlatform != null) 
             {
                 gameManager.leftPlatform.PlatformTakeDamage(100f);
-                Debug.Log("Enemy ran into back wall.");
-             } else if (collision.gameObject.GetComponent<Enemies>().portalOrigin == Enemies.PortalOrigins.middle)
+             } else if (collision.gameObject.GetComponent<Enemies>().portalOrigin == Enemies.PortalOrigins.middle && gameManager.middlePlatform != null)
              {
                 gameManager.middlePlatform.PlatformTakeDamage(100f);
-            } else if (collision.gameObject.GetComponent<Enemies>().portalOrigin == Enemies.PortalOrigins.right) 
+            } else if (collision.gameObject.GetComponent<Enemies>().portalOrigin == Enemies.PortalOrigins.right && gameManager.rightPlatform != null) 
               {
                 gameManager.rightPlatform.PlatformTakeDamage(100f);
             }

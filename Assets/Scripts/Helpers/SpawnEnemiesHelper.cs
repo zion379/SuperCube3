@@ -123,106 +123,80 @@ public class SpawnEnemiesHelper : MonoBehaviour
         }
     }
 
-    public bool TestingSpawnManagement = false;
-
     public int[] LastTwoSpawnedPositions = new int[2] { 0, 0 }; //keeps track of last two positions
     public GameObject EnemyPrefab;
     private void RandomlyAssignEnemyPositions(float EnemySpeed, float SpawnSpeed)
-    {
-        // generate new random position 
-        int newSpawnPosition = 0;
-
-        int position = Random.Range(1, 4); // 1 == left, 2 == middle, 3 == right
-
-        bool platformDoesNotExist = false;
-
-
-
-        /*
-        // this does not run unless i turn it on.
-        if (TestingSpawnManagement)
+    {   
+        // check to make sure all platforms are not down.
+        if(!(DestroyedPlatforms.Count >= 3)) 
         {
-            // if last two positions were repeated then change it to new position.
+            // generate new random position 
+            int newSpawnPosition = 0;
+
+            int position = Random.Range(1, 4); // 1 == left, 2 == middle, 3 == right
+
+            bool platformDoesNotExist = false; // may not need this.
+
             if (position == LastTwoSpawnedPositions[0] && position == LastTwoSpawnedPositions[1])
             {
                 int lastrepeatedpos = LastTwoSpawnedPositions[0];
                 int newpos = Random.Range(1, 4);
 
-                //check if randomly generated pos is equal to one of the destroyed positions.
-                for (int i = 0; i < DestroyedPlatforms.Count; i++)
+                if (CheckIfPlatformIsSpawnable(newpos))
                 {
-                    if (newpos == DestroyedPlatforms[i]) { platformDoesNotExist = true; } else { platformDoesNotExist = false; }
+                    position = newpos;
                 }
-
-                while (newpos == lastrepeatedpos || platformDoesNotExist) // infinite loop
+                else
                 {
-                    newpos = Random.Range(1, 4);
-                }
-
-                // set platform Does not exist to false since we got through number generation
-                platformDoesNotExist = false;
-
-                // proceed with assigning spawn pos)
-                position = newpos;
-            }
-
-            //check if randomly generated pos is equal to one of the destroyed positions. -- second check for this. for not repeated portal  spawns.
-            for (int i = 0; i < DestroyedPlatforms.Count; i++)
-            {
-                if (newSpawnPosition == DestroyedPlatforms[i]) { platformDoesNotExist = true; } else { platformDoesNotExist = false; } // check to see if generated number is equal to  destroyed platform.
-                Debug.Log("destroyed platforms = " + platformDoesNotExist);
-            }
-
-            //if platformdoesnot exist = true then generate new random number until it does not equal destroyed position.
-            while (platformDoesNotExist) // loop until this equals false. -- also dont forget to check if all positions have been destroyed.
-            {
-                int newpos = Random.Range(1, 4);
-
-
-                // since we know there are only 3 platforms we should check two positions from the array to see if there destroyed 
-                //Check array size
-                if (DestroyedPlatforms.Count == 2)
-                {
-                    if (!(newpos == DestroyedPlatforms[0]) && !(newpos == DestroyedPlatforms[1]))
+                    // now check if choosen number is not a destoyed platform.
+                    while (!CheckIfPlatformIsSpawnable(newpos))
                     {
-                        // if new pos is not equal both platforms pos in destroyed list set platformDoesnotExist to false to exit loop.
-                        platformDoesNotExist = false;
-                        position = newpos;
+                        newpos = Random.Range(1, 4);
+                        Debug.Log("In generated loop");
+                    }
+                    // set position
+                    position = newpos;
+                }
+            }
+            else
+            {
+                // number was not repeated
+
+                // now check if choosen number is not a destoyed platform.
+                if (!CheckIfPlatformIsSpawnable(position))
+                {
+                    while (!CheckIfPlatformIsSpawnable(position))
+                    {
+                        position = Random.Range(1, 4); // run until number does not equal destroyed platform
                     }
                 }
-                else if (DestroyedPlatforms.Count == 1)
-                {
-                    if (newpos != DestroyedPlatforms[0]) { platformDoesNotExist = false;  position = newpos; }
-                }
             }
-        }
-        */
 
+            newSpawnPosition = position;
+            Debug.Log(newSpawnPosition);
 
-        newSpawnPosition = position;
-        Debug.Log(newSpawnPosition);
-
-        // assign and spawn
-        if (newSpawnPosition == 1)
-        {
-            UpdateLastPosition(1);
-            GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyLeftSpawn, false);
-            // set enemy portal origin
-            Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.left;
-        }
-        else if (newSpawnPosition == 2)
-        {
-            UpdateLastPosition(2);
-            GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyMiddleSpawn, false);
-            // set enemy portal origin
-            Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.middle;
-        }
-        else if (newSpawnPosition == 3)
-        {
-            UpdateLastPosition(3);
-            GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyRightSpawn, false);
-            // set enemy portal origin
-            Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.right;
+            // assign and spawn
+            if (newSpawnPosition == 1)
+            {
+                UpdateLastPosition(1);
+                GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyLeftSpawn, false);
+                // set enemy portal origin
+                Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.left;
+            }
+            else if (newSpawnPosition == 2)
+            {
+                UpdateLastPosition(2);
+                GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyMiddleSpawn, false);
+                // set enemy portal origin
+                Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.middle;
+            }
+            else if (newSpawnPosition == 3)
+            {
+                UpdateLastPosition(3);
+                GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyRightSpawn, false);
+                // set enemy portal origin
+                Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.right;
+            }
         }
     }
 

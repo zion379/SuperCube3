@@ -1745,7 +1745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManger: {fileID: 0}
-  EnemySpawnRate: 1
+  EnemySpawnRate: 2
   pauseEnemySpawning: 0
   currentDifficulty: 0
   leftPlatformDowm: 0
