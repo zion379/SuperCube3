@@ -10,10 +10,13 @@ public class Platform : MonoBehaviour
     public enum platforms {left, right, middle}
     public platforms platform = platforms.middle;
 
+    public SpawnEnemiesHelper spawnEnemiesHelper;
+
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spawnEnemiesHelper = GameObject.Find("GameManager").GetComponent<SpawnEnemiesHelper>();
     }
 
     public void PlatformTakeDamage(float Damage) 
@@ -25,15 +28,15 @@ public class Platform : MonoBehaviour
             //let game manager know that the platform should not be used to spawn.
             if(platform == platforms.left) 
             {
-                gameManager.LeftPlatformDown();
+                spawnEnemiesHelper.LeftPlatformDown();
              } 
              else if(platform == platforms.middle) 
              {
-                gameManager.MiddlePlatformDown();
+                spawnEnemiesHelper.MiddlePlatformDown();
               }
             else if(platform == platforms.right) 
             {
-                gameManager.RightPlatformDown();
+                spawnEnemiesHelper.RightPlatformDown();
              }
             Destroy(this.gameObject);
          }

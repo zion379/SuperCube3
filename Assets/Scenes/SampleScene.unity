@@ -336,6 +336,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   platformHealth: 100
   platform: 0
+  spawnEnemiesHelper: {fileID: 0}
 --- !u!1 &668024967
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,6 +690,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   platformHealth: 100
   platform: 1
+  spawnEnemiesHelper: {fileID: 0}
 --- !u!1 &907284285
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +942,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   platformHealth: 100
   platform: 2
+  spawnEnemiesHelper: {fileID: 0}
 --- !u!1 &1133091685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,6 +1360,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   platformHealth: 100
   platform: 2
+  spawnEnemiesHelper: {fileID: 0}
 --- !u!1 &1903452583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,6 +1680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2086366958}
   - component: {fileID: 2086366957}
+  - component: {fileID: 2086366959}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1713,10 +1718,6 @@ MonoBehaviour:
   GameOver: 0
   currentDifficulty: 0
   pauseEnemySpawning: 0
-  EnemySpawnRate: 2
-  LastTwoSpawnedPositions: 0000000000000000
-  EnemyPrefab: {fileID: 7098051650701779875, guid: 8cfb16c6e718d4ad9bf6a0e6f5067af4,
-    type: 3}
 --- !u!4 &2086366958
 Transform:
   m_ObjectHideFlags: 0
@@ -1731,6 +1732,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2086366959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086366956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c0a31931f6998499bcea2da61ac68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManger: {fileID: 0}
+  EnemySpawnRate: 1
+  pauseEnemySpawning: 0
+  currentDifficulty: 0
+  leftPlatformDowm: 0
+  rightPlatformDown: 0
+  middlePlatformDown: 0
+  DestroyedPlatforms: 
+  TestingSpawnManagement: 1
+  LastTwoSpawnedPositions: 0000000000000000
+  EnemyPrefab: {fileID: 7098051650701779875, guid: 8cfb16c6e718d4ad9bf6a0e6f5067af4,
+    type: 3}
 --- !u!1 &2119362490
 GameObject:
   m_ObjectHideFlags: 0

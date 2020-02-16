@@ -1,12 +1,13 @@
 ﻿<Properties StartupConfiguration="{4C4F943F-65F6-C092-29B9-B8601FBD4ECE}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EndOfPlatFormCollider.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Platform.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameManager.cs" Line="148" Column="59" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="23" Column="24" />
       <File FileName="Assets/Scripts/Player.cs" Line="63" Column="5" />
-      <File FileName="Assets/Scripts/Enemies.cs" Line="39" Column="35" />
-      <File FileName="Assets/Scripts/Platform.cs" Line="6" Column="2" />
-      <File FileName="Assets/Scripts/Bullet.cs" Line="32" Column="77" />
-      <File FileName="Assets/Scripts/EndOfPlatFormCollider.cs" Line="7" Column="23" />
+      <File FileName="Assets/Scripts/Enemies.cs" Line="71" Column="66" />
+      <File FileName="Assets/Scripts/Platform.cs" Line="19" Column="27" />
+      <File FileName="Assets/Scripts/Bullet.cs" Line="35" Column="36" />
+      <File FileName="Assets/Scripts/EndOfPlatFormCollider.cs" Line="27" Column="56" />
+      <File FileName="Assets/Scripts/Helpers/SpawnEnemiesHelper.cs" Line="52" Column="66" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
