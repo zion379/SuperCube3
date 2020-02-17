@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public GameObject Bullet;
     public Transform BulletSpawn;
 
+    public SlamDetection slamDetection;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         BulletSpawn = GameObject.Find("BulletSpawn").transform;
 
+        slamDetection = GetComponent<SlamDetection>();
     }
 
     // Update is called once per frame
@@ -37,6 +40,9 @@ public class Player : MonoBehaviour
         {
             Shoot();
         }
+
+        // check id player is falling from slam
+        IsPlayerFallingFromSlam();
     }
 
     private void Died() 
@@ -175,7 +181,22 @@ public class Player : MonoBehaviour
 
     private void Slam() 
     {
-        rigidbody.velocity = Vector3.down * slamForce; 
+        rigidbody.velocity = Vector3.down * slamForce;
+    }
+
+    [Range(-10,-4)]
+    public float slamTriggerDetectionvalue = -4f;
+    private void IsPlayerFallingFromSlam() // this will return a bool 
+    {
+        if (rigidbody.velocity.y <= slamTriggerDetectionvalue) 
+        {
+            Debug.Log("Slam detected");
+            slamDetection.slaming = true;
+         }
+        else
+        {
+            slamDetection.slaming = false;
+         }
     }
 
     private void Shoot() 

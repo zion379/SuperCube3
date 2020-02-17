@@ -61,9 +61,14 @@ public class Enemies : MonoBehaviour
         Health -= damage;
         if(Health <= 0) 
         {
-            // Play Death Animation
-            Destroy(this.gameObject, .5f); // make sure to add in wait time later.
+            Die();
          }
+    }
+
+    public void Die() 
+    {
+        // Play Death Animation
+        Destroy(this.gameObject, .5f); // make sure to add in wait time later.
     }
 
     public enum PortalOrigins  {left, right, middle}

@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Platform.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
+    <Compile Include="Assets\Scripts\SlamDetection.cs" />
     <None Include="Assets\DOTween\readme.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/zionjohnson/Documents/New Unity Repo/SuperCube3/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
