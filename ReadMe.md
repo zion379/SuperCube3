@@ -1,1 +1,1 @@
-This is a hypercasul mobile game.
+This is a hypercasual mobile game.
