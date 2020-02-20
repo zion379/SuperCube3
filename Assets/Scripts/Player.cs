@@ -115,8 +115,8 @@ public class Player : MonoBehaviour
          }
         else 
         {
-            return false;
             Debug.LogError("Could not find positions");
+            return false;
          }
     }
 
@@ -190,7 +190,6 @@ public class Player : MonoBehaviour
     {
         if (rigidbody.velocity.y <= slamTriggerDetectionvalue) 
         {
-            Debug.Log("Slam detected");
             slamDetection.slaming = true;
          }
         else

@@ -37,6 +37,7 @@ public class Enemies : MonoBehaviour
     {
         // this can be called from other scripts
         //Play Exploding animation
+        //Decrease Player health.
         Destroy(this.gameObject, .1f); // make sure to add in wait time later.
 
     }
@@ -61,14 +62,40 @@ public class Enemies : MonoBehaviour
         Health -= damage;
         if(Health <= 0) 
         {
+            IncreasePlayerScore();
             Die();
          }
+    }
+
+    [Range(1,10)]
+    public float slamForce = 1f;
+    public void DieFromSlam()
+    {
+        rigidBody.AddForce(new Vector3(0, slamForce, slamForce), ForceMode.Acceleration);
+        Destroy(this.gameObject, 1f);
     }
 
     public void Die() 
     {
         // Play Death Animation
         Destroy(this.gameObject, .5f); // make sure to add in wait time later.
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Explode();
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Explode();
+        }
     }
 
     public enum PortalOrigins  {left, right, middle}

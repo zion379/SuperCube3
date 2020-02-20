@@ -49,6 +49,9 @@ public class SpawnEnemiesHelper : MonoBehaviour
     public bool rightPlatformDown = false;
     public bool middlePlatformDown = false;
 
+    //keep track of destroyed portals
+    public List<int> DestroyedPortals = new List<int>();
+
     //Array of platforms that can  not be used due to being destroyed.
     public List<int> DestroyedPlatforms = new List<int>();
 
@@ -85,12 +88,14 @@ public class SpawnEnemiesHelper : MonoBehaviour
 
     }
 
-    // resets all platforms that were set to down due to deletion from explosion
+    // resets all platforms that were set to down due to deletion from explosion // this is going to be called by the game manager.
     public void ResetDownPlatforms()
     {
         leftPlatformDowm = false;
         rightPlatformDown = false;
         middlePlatformDown = false;
+        // reset Array aswell.
+        DestroyedPlatforms.Clear();
     }
 
     // change the difficulty settings with varibles -- when possible
@@ -127,29 +132,28 @@ public class SpawnEnemiesHelper : MonoBehaviour
     public GameObject EnemyPrefab;
     private void RandomlyAssignEnemyPositions(float EnemySpeed, float SpawnSpeed)
     {   
-        // check to make sure all platforms are not down.
-        if(!(DestroyedPlatforms.Count >= 3)) 
+        // check to make sure all platforms are not down. And portals...
+        if(!(DestroyedPlatforms.Count >= 3) && !(DestroyedPortals.Count >= 3)) 
         {
             // generate new random position 
             int newSpawnPosition = 0;
 
             int position = Random.Range(1, 4); // 1 == left, 2 == middle, 3 == right
 
-            bool platformDoesNotExist = false; // may not need this.
-
             if (position == LastTwoSpawnedPositions[0] && position == LastTwoSpawnedPositions[1])
             {
+                Debug.Log("repeat");
                 int lastrepeatedpos = LastTwoSpawnedPositions[0];
                 int newpos = Random.Range(1, 4);
 
-                if (CheckIfPlatformIsSpawnable(newpos))
+                if (CheckIfPlatformIsSpawnable(newpos) || CheckIfPortalIsSpawnable(newpos))
                 {
                     position = newpos;
                 }
                 else
                 {
-                    // now check if choosen number is not a destoyed platform.
-                    while (!CheckIfPlatformIsSpawnable(newpos))
+                    // now check if choosen number is a destoyed platform. Or destroyed portal
+                    while (!CheckIfPlatformIsSpawnable(newpos) || !CheckIfPortalIsSpawnable(newpos))
                     {
                         newpos = Random.Range(1, 4);
                         Debug.Log("In generated loop");
@@ -160,12 +164,13 @@ public class SpawnEnemiesHelper : MonoBehaviour
             }
             else
             {
+                Debug.Log("position was not repeated");
                 // number was not repeated
 
-                // now check if choosen number is not a destoyed platform.
-                if (!CheckIfPlatformIsSpawnable(position))
+                // now check if choosen number is a destoyed platform.
+                if (!CheckIfPlatformIsSpawnable(position) || !CheckIfPortalIsSpawnable(position))
                 {
-                    while (!CheckIfPlatformIsSpawnable(position))
+                    while (!CheckIfPlatformIsSpawnable(position) || !CheckIfPortalIsSpawnable(position))
                     {
                         position = Random.Range(1, 4); // run until number does not equal destroyed platform
                     }
@@ -173,7 +178,6 @@ public class SpawnEnemiesHelper : MonoBehaviour
             }
 
             newSpawnPosition = position;
-            Debug.Log(newSpawnPosition);
 
             // assign and spawn
             if (newSpawnPosition == 1)
@@ -224,6 +228,22 @@ public class SpawnEnemiesHelper : MonoBehaviour
         for (int i = 0; i < DestroyedPlatforms.Count; i++)
         {
             if (pos == DestroyedPlatforms[i])
+            {
+                return false;
+            }
+        }
+
+        // if everything ran through the number is good to go
+        return true;
+    }
+
+    private bool CheckIfPortalIsSpawnable(int pos)
+    {
+        Debug.Log(DestroyedPortals.Count);
+        for (int i = 0; i < DestroyedPortals.Count; i++)
+        {
+            Debug.Log("pos : " + pos + " Destroyed portal : " + DestroyedPortals[i]);
+            if (pos == DestroyedPortals[i])
             {
                 return false;
             }

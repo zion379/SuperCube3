@@ -112,6 +112,8 @@ MonoBehaviour:
   KillPoints: 1
   rigidBody: {fileID: 0}
   Health: 100
+  slamForce: 10
+  portalOrigin: 2
 --- !u!54 &3919823598615077303
 Rigidbody:
   m_ObjectHideFlags: 0

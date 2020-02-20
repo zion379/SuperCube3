@@ -31,12 +31,26 @@ public class SlamDetection : MonoBehaviour
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward) * RaycastDetectionDistance, out hit))
         {
             // check if enemy detected
+            if (hit.collider.tag == "Enemy")
+            {
+                if (slaming)
+                {
+                    hit.collider.gameObject.GetComponent<Enemies>().DieFromSlam();
+                }
+            }
          }
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down) * RaycastDetectionDistance, out hit))
         {
             // check if enemy detected
-         }
+            if (hit.collider.tag == "Enemy")
+            {
+                if (slaming)
+                {
+                    hit.collider.gameObject.GetComponent<Enemies>().DieFromSlam();
+                }
+            }
+        }
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RaycastDetectionDistance, Color.red);
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * RaycastDetectionDistance, Color.red);
     }
