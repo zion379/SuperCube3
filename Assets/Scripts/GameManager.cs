@@ -13,15 +13,23 @@ public class GameManager : MonoBehaviour
 
     //Level objects
     public GameObject Level;
+    //Enemy Spawn Positions
     public Transform EnemyRightSpawn;
     public Transform EnemyMiddleSpawn;
     public Transform EnemyLeftSpawn;
+    //Player Positions
     public Transform PlayerPosRight;
     public Transform PlayerPosMiddle;
     public Transform PlayerPosLeft;
+    //Platforms
     public Platform leftPlatform;
     public Platform middlePlatform;
     public Platform rightPlatform;
+    // Portals
+    public Portal leftPortal;
+    public Portal middlePortal;
+    public Portal rightPortal;
+
 
     public bool GameOver = false;
 
@@ -29,7 +37,7 @@ public class GameManager : MonoBehaviour
     public Difficulty currentDifficulty = Difficulty.easy;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Set up level stuff. 
         //Enemy spawn
@@ -55,6 +63,11 @@ public class GameManager : MonoBehaviour
         rightPlatform = Level.transform.Find("Platforms").transform.Find("Right").transform.Find("RightPlatform").GetComponent<Platform>();
         leftPlatform = Level.transform.Find("Platforms").transform.Find("Left").transform.Find("LeftPlatform").GetComponent<Platform>();
         middlePlatform = Level.transform.Find("Platforms").transform.Find("Middle").transform.Find("MiddlePlatform").GetComponent<Platform>();
+
+        //Get Portals
+        leftPortal = Level.transform.Find("Platforms").transform.Find("Left").transform.Find("Portal").GetComponent<Portal>();
+        middlePortal = Level.transform.Find("Platforms").transform.Find("Middle").transform.Find("Portal").GetComponent<Portal>();
+        rightPortal = Level.transform.Find("Platforms").transform.Find("Right").transform.Find("Portal").GetComponent<Portal>();
     }
 
     // Update is called once per frame
@@ -62,8 +75,6 @@ public class GameManager : MonoBehaviour
     {
         // update score
     }
-
-    public bool pauseEnemySpawning = false;
 
     void FixedUpdate()
     {
