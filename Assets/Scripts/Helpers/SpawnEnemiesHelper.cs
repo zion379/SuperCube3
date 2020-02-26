@@ -146,7 +146,7 @@ public class SpawnEnemiesHelper : MonoBehaviour
                 int lastrepeatedpos = LastTwoSpawnedPositions[0];
                 int newpos = Random.Range(1, 4);
 
-                if (CheckIfPlatformIsSpawnable(newpos) || CheckIfPortalIsSpawnable(newpos))
+                if (CheckIfPlatformIsSpawnable(newpos) && CheckIfPortalIsSpawnable(newpos))
                 {
                     position = newpos;
                 }
