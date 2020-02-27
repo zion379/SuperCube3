@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
 
         //Setup Player
         player = GameObject.Find("Player").GetComponent<Player>();
+        // get player positions.
         player.RightPosition = PlayerPosRight;
         player.MiddlePosition = PlayerPosMiddle;
         player.LeftPosition = PlayerPosLeft;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -120,80 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &505905932
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 143703520316214373, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_Name
-      value: Bullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 143703520316214373, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022033768129557295, guid: b9fd925f4f89247b99f4761bc73a91a4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b9fd925f4f89247b99f4761bc73a91a4, type: 3}
 --- !u!1 &573403238
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,8 +700,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26261b50b114ae89677c61094089c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: {fileID: 2072739198901619019, guid: 287e21a2aa3144349bc14c07fecb5a93, type: 3}
+  prefabLevel: {fileID: 2072739198901619019, guid: 287e21a2aa3144349bc14c07fecb5a93,
+    type: 3}
   Y_offset: -12
+  enemyRightSpawn: {fileID: 0}
+  enemyMiddleSpawn: {fileID: 0}
+  enemyLeftSpawn: {fileID: 0}
+  playerPosRight: {fileID: 0}
+  playerPosMiddle: {fileID: 0}
+  playerPosLeft: {fileID: 0}
+  leftPlatform: {fileID: 0}
+  middlePlatform: {fileID: 0}
+  rightPlatform: {fileID: 0}
+  leftPortal: {fileID: 0}
+  middlePortal: {fileID: 0}
+  rightPortal: {fileID: 0}
+  gneratedLevel: {fileID: 0}
+  levelCounter: 0
 --- !u!1001 &2072739197992268278
 PrefabInstance:
   m_ObjectHideFlags: 0
