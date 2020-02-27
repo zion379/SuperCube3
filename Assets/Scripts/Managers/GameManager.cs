@@ -91,6 +91,31 @@ public class GameManager : MonoBehaviour
         //Trigger Game Over
     }
 
+    public void GameOverFromDestroyedPlatforms()
+    {
+        if(!GameOver)
+        {
+            // this is called from GameLogic.
+            Debug.Log("Game Over from destroyed platforms");
+            // update ui 
+            // load up game over menu.
+            // camera should no longer follow player -- let player fall off screen.
+            GameOver = true;
+        }
+    }
+
+    // reset gameOver
+    public void ResetGameOver()
+    {
+        GameOver = false;
+    }
+
+    public void DropPlayerToNextLevel()
+    {
+        // generate new level and play platform animation.
+        levelGeneration.GenerateNewLevel();
+    }
+
     //Get currentPlatforms and also create and reassign gameobjects here.
     public void GetCurrentPlatforms() 
     {

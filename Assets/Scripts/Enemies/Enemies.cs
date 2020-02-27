@@ -18,6 +18,8 @@ public class Enemies : MonoBehaviour
 
     public PointSystem pointSystem;
 
+    public GameLogic gameLogic;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,12 @@ public class Enemies : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
 
         pointSystem = GameObject.Find("GameManager").GetComponent<PointSystem>();
+        if (pointSystem == null)
+        {
+            Debug.LogError("enemy point system is null");
+        }
+
+        gameLogic = GameObject.Find("GameManager").GetComponent<GameLogic>();
     }
 
     // Update is called once per frame
@@ -53,6 +61,8 @@ public class Enemies : MonoBehaviour
     private void IncreasePlayerScore() 
     {
         pointSystem.IncreaseScore(KillPoints);
+        gameLogic.KeepTrackOfKilledEnemies();
+
      }
 
     private void moveEnemyFoward() 

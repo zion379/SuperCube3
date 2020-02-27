@@ -30,10 +30,18 @@ public class LevelGeneration : MonoBehaviour
 
     public GameManager gameManager;
 
+    public GameLogic gameLogic;
+
+    public SpawnEnemiesHelper spawnEnemiesHelper;
+
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GetComponent<GameManager>();
         //GenerateNewLevel(); // on run this in start if testing.
+
+        gameLogic = GetComponent<GameLogic>();
+
+        spawnEnemiesHelper = GetComponent<SpawnEnemiesHelper>();
     }
 
 
@@ -90,6 +98,11 @@ public class LevelGeneration : MonoBehaviour
         gameManager.middlePortal = middlePortal;
         gameManager.rightPortal = rightPortal;
 
+        // reset Portals down
+        gameLogic.ResetPortalsDown();
+
+        //reset down platforms
+        spawnEnemiesHelper.ResetDownPlatforms();
     }
 
     public void UpdateLevelCounter()

@@ -88,7 +88,7 @@ public class SpawnEnemiesHelper : MonoBehaviour
 
     }
 
-    // resets all platforms that were set to down due to deletion from explosion // this is going to be called by the game manager.
+    // resets all platforms that were set to down due to deletion from explosion // this is called by the Level Generation.
     public void ResetDownPlatforms()
     {
         leftPlatformDowm = false;
@@ -96,6 +96,7 @@ public class SpawnEnemiesHelper : MonoBehaviour
         middlePlatformDown = false;
         // reset Array aswell.
         DestroyedPlatforms.Clear();
+        DestroyedPortals.Clear();
     }
 
     // change the difficulty settings with varibles -- when possible
@@ -142,7 +143,6 @@ public class SpawnEnemiesHelper : MonoBehaviour
 
             if (position == LastTwoSpawnedPositions[0] && position == LastTwoSpawnedPositions[1])
             {
-                Debug.Log("repeat");
                 int lastrepeatedpos = LastTwoSpawnedPositions[0];
                 int newpos = Random.Range(1, 4);
 
@@ -164,7 +164,6 @@ public class SpawnEnemiesHelper : MonoBehaviour
             }
             else
             {
-                Debug.Log("position was not repeated");
                 // number was not repeated
 
                 // now check if choosen number is a destoyed platform.
@@ -239,10 +238,8 @@ public class SpawnEnemiesHelper : MonoBehaviour
 
     private bool CheckIfPortalIsSpawnable(int pos)
     {
-        Debug.Log(DestroyedPortals.Count);
         for (int i = 0; i < DestroyedPortals.Count; i++)
         {
-            Debug.Log("pos : " + pos + " Destroyed portal : " + DestroyedPortals[i]);
             if (pos == DestroyedPortals[i])
             {
                 return false;
