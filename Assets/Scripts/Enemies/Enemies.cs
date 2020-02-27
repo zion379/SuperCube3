@@ -16,11 +16,15 @@ public class Enemies : MonoBehaviour
 
     public float Health = 100f;
 
+    public PointSystem pointSystem;
+
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rigidBody = GetComponent<Rigidbody>();
+
+        pointSystem = GameObject.Find("GameManager").GetComponent<PointSystem>();
     }
 
     // Update is called once per frame
@@ -48,7 +52,7 @@ public class Enemies : MonoBehaviour
 
     private void IncreasePlayerScore() 
     {
-        // increase player score in game manager
+        pointSystem.IncreaseScore(KillPoints);
      }
 
     private void moveEnemyFoward() 

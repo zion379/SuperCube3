@@ -8,10 +8,12 @@ public class Portal : MonoBehaviour
     public PortalPos Position = PortalPos.middle;
 
     public ManagePortalsHelper managePortalsHelper;
+    public PointSystem pointSystem;
 
     private void Start()
     {
         managePortalsHelper = GameObject.Find("GameManager").GetComponent<ManagePortalsHelper>();
+        pointSystem = GameObject.Find("GameManager").GetComponent<PointSystem>();
     }
 
     public void DestroyPortal()
@@ -29,6 +31,8 @@ public class Portal : MonoBehaviour
                 break;
         }
 
+        //Increase Player score
+        pointSystem.AddPortalDestroyedPoints();
         // Add in destroy animation
         // Add in destroy Sound Effects
         Destroy(this.gameObject, 1f);
