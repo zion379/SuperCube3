@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     public enum Difficulty  {easy, ok, hard, crazy, extreme}
     public Difficulty currentDifficulty = Difficulty.easy;
 
+    public LevelGeneration levelGeneration; // this has all of the functions for generating levels.
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -68,6 +70,9 @@ public class GameManager : MonoBehaviour
         leftPortal = Level.transform.Find("Platforms").transform.Find("Left").transform.Find("Portal").GetComponent<Portal>();
         middlePortal = Level.transform.Find("Platforms").transform.Find("Middle").transform.Find("Portal").GetComponent<Portal>();
         rightPortal = Level.transform.Find("Platforms").transform.Find("Right").transform.Find("Portal").GetComponent<Portal>();
+
+        // get Level Generation script
+        levelGeneration = GetComponent<LevelGeneration>();
     }
 
     // Update is called once per frame
