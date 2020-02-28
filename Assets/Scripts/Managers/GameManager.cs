@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public Portal rightPortal;
 
 
-    public bool GameOver = false;
+    public bool gameOver = false;
 
     public enum Difficulty  {easy, ok, hard, crazy, extreme}
     public Difficulty currentDifficulty = Difficulty.easy;
@@ -89,25 +89,32 @@ public class GameManager : MonoBehaviour
     public void playerDied() 
     {
         //Trigger Game Over
+        playerDead = true;
     }
 
     public void GameOverFromDestroyedPlatforms()
     {
-        if(!GameOver)
+        if(!gameOver)
         {
             // this is called from GameLogic.
             Debug.Log("Game Over from destroyed platforms");
             // update ui 
             // load up game over menu.
             // camera should no longer follow player -- let player fall off screen.
-            GameOver = true;
+            gameOver = true;
         }
     }
 
     // reset gameOver
     public void ResetGameOver()
     {
-        GameOver = false;
+        gameOver = false;
+        playerDead = false;
+    }
+
+    public void GameOver()
+    {
+        /// set in other scripts that game is opver and bring up gameover ui.
     }
 
     public void DropPlayerToNextLevel()

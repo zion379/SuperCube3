@@ -505,7 +505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133091685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -4}
+  m_LocalPosition: {x: 0, y: 1, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 668024968}
@@ -576,7 +576,9 @@ MonoBehaviour:
   scale: 2
   slaming: 0
   DetectionTrigger: {fileID: 0}
+  rigidbody: {fileID: 0}
   RaycastDetectionDistance: 3
+  BreakPlatformEnergy: 100
 --- !u!1 &2086366956
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +631,7 @@ MonoBehaviour:
   leftPortal: {fileID: 0}
   middlePortal: {fileID: 0}
   rightPortal: {fileID: 0}
-  GameOver: 0
+  gameOver: 0
   currentDifficulty: 0
   levelGeneration: {fileID: 0}
 --- !u!4 &2086366958
@@ -660,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManger: {fileID: 0}
   EnemySpawnRate: 2
-  pauseEnemySpawning: 0
+  pauseEnemySpawning: 1
   currentDifficulty: 0
   leftPlatformDowm: 0
   rightPlatformDown: 0
@@ -760,6 +762,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2072739198444571270, guid: 287e21a2aa3144349bc14c07fecb5a93,
+        type: 3}
+      propertyPath: ShatteredPlatform
+      value: 
+      objectReference: {fileID: 7584217588048398984, guid: e9645db107c2ff641b642b024acb0fc7,
+        type: 3}
+    - target: {fileID: 2072739198444571293, guid: 287e21a2aa3144349bc14c07fecb5a93,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072739198526872416, guid: 287e21a2aa3144349bc14c07fecb5a93,
+        type: 3}
+      propertyPath: ShatteredPlatform
+      value: 
+      objectReference: {fileID: 7584217588048398984, guid: e9645db107c2ff641b642b024acb0fc7,
+        type: 3}
+    - target: {fileID: 2072739198526872423, guid: 287e21a2aa3144349bc14c07fecb5a93,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2072739198901619016, guid: 287e21a2aa3144349bc14c07fecb5a93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -819,6 +843,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072739199117110017, guid: 287e21a2aa3144349bc14c07fecb5a93,
+        type: 3}
+      propertyPath: ShatteredPlatform
+      value: 
+      objectReference: {fileID: 7584217588048398984, guid: e9645db107c2ff641b642b024acb0fc7,
+        type: 3}
+    - target: {fileID: 2072739199117110020, guid: 287e21a2aa3144349bc14c07fecb5a93,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 287e21a2aa3144349bc14c07fecb5a93, type: 3}

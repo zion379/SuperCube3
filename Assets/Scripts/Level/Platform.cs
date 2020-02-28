@@ -12,11 +12,18 @@ public class Platform : MonoBehaviour
 
     public SpawnEnemiesHelper spawnEnemiesHelper;
 
+    public MeshRenderer meshRenderer;
+    public BoxCollider boxCollider;
+
+    public GameObject ShatteredPlatform;
+
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnEnemiesHelper = GameObject.Find("GameManager").GetComponent<SpawnEnemiesHelper>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     public void PlatformTakeDamage(float Damage) 
@@ -40,5 +47,25 @@ public class Platform : MonoBehaviour
              }
             Destroy(this.gameObject);
          }
+    }
+
+    public void ShatterPlatform()
+    {
+        // turn off mesh render && turn of box collider or turn trigger on
+        meshRenderer.enabled = false;
+        boxCollider.isTrigger = true;
+        // instantiate shattered version
+        Instantiate(ShatteredPlatform, this.transform.position, Quaternion.identity);
+        Debug.Log("platform");
+    }
+
+    public bool Triggerbreak = false;
+     void Update()
+    {
+        if (Triggerbreak)
+        {
+            ShatterPlatform();
+            Triggerbreak = false;
+        }
     }
 }

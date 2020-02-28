@@ -39,10 +39,13 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
+            Debug.Log("Shooting");
         }
 
         // check id player is falling from slam
         IsPlayerFallingFromSlam();
+
+        CheckHealth();
     }
 
     private void Died() 
@@ -50,15 +53,21 @@ public class Player : MonoBehaviour
         // call player died from game manager
         //play players death animation
         Debug.Log("Player is dead");
+        gameManager.playerDied();
+        this.gameObject.active = false;
      }
 
     public void TakeDamage(float damageAmount) 
     {
         Health -= damageAmount;
-        if(Health <= 0) 
+    }
+
+    private void CheckHealth()
+    {
+        if (Health <= 0)
         {
             Died();
-         }
+        }
     }
 
     //Testing for player death.

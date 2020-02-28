@@ -20,6 +20,10 @@ public class Enemies : MonoBehaviour
 
     public GameLogic gameLogic;
 
+    public Player player;
+
+    public float damagetoPlayer = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,11 @@ public class Enemies : MonoBehaviour
         }
 
         gameLogic = GameObject.Find("GameManager").GetComponent<GameLogic>();
+
+        if(gameManager.playerDead != true)
+        {
+            player = GameObject.Find("Player").GetComponent<Player>();
+        }
     }
 
     // Update is called once per frame
@@ -95,20 +104,25 @@ public class Enemies : MonoBehaviour
         Destroy(this.gameObject, .5f); // make sure to add in wait time later.
     }
 
+    public bool appliedDamage = false;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !appliedDamage)
         {
             Explode();
+            player.TakeDamage(damagetoPlayer);
+            appliedDamage = true;
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !appliedDamage)
         {
             Explode();
+            player.TakeDamage(damagetoPlayer);
+            appliedDamage = true;
         }
     }
 

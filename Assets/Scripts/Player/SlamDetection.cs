@@ -9,13 +9,14 @@ public class SlamDetection : MonoBehaviour
     public bool slaming = false;
 
     public GameObject DetectionTrigger;
+    public Rigidbody rigidbody;
 
     private void Start()
     {
         DetectionTrigger = GameObject.Find("SlamDetectionCylinder");
         DetectionTrigger.transform.localScale = new Vector3(scale, scale, scale);
 
-
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -69,4 +70,23 @@ public class SlamDetection : MonoBehaviour
         }
     }
     */
+
+
+    public float BreakPlatformEnergy = 100f;
+    // slam break platform
+    public void BreakPlatform()
+    {
+
+    }
+
+    public float breakVelThreshold = -10f;
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.transform.gameObject.layer == 12 && slaming)
+        {
+           Platform platform = collision.transform.gameObject.GetComponent<Platform>();
+            platform.ShatterPlatform();
+        }
+    }
 }
