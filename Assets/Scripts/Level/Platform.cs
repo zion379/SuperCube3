@@ -59,6 +59,7 @@ public class Platform : MonoBehaviour
         Debug.Log("platform");
     }
 
+    // test.
     public bool Triggerbreak = false;
      void Update()
     {
