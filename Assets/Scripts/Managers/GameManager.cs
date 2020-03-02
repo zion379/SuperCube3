@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     public LevelGeneration levelGeneration; // this has all of the functions for generating levels.
 
+    SlamDetection slamDetection;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -74,6 +76,9 @@ public class GameManager : MonoBehaviour
 
         // get Level Generation script
         levelGeneration = GetComponent<LevelGeneration>();
+
+        //Get slam detection from player gameobject
+        slamDetection = GameObject.Find("Player").GetComponent<SlamDetection>();
     }
 
     // Update is called once per frame
@@ -119,17 +124,33 @@ public class GameManager : MonoBehaviour
 
     public void DropPlayerToNextLevel()
     {
+        // get player pos and open correct platform.
+        switch (player.currentPos)
+        {
+            case Player.PlayerPos.left:
+                leftPlatform.TriggerPulse = true; // once player has advanced to next level permantly close platform
+                break;
+            case Player.PlayerPos.middle:
+                middlePlatform.TriggerPulse = true; // once player has advanced to next level permantly close platform
+                break;
+            case Player.PlayerPos.right:
+                rightPlatform.TriggerPulse = true; // once player has advanced to next level permantly close platform
+                break;
+
+        }
+
         // generate new level and play platform animation.
-        levelGeneration.GenerateNewLevel();
+        levelGeneration.GenerateNewLevel(); // put this in a diffrent location to generate new level before this.
     }
 
-    //Get currentPlatforms and also create and reassign gameobjects here.
-    public void GetCurrentPlatforms() 
+    public void SafeToBreakPlatforms()
     {
-        // get current platform scripts
-     }
+        // set destroy platforms to true. -- this may not be here anymore.
+        slamDetection.safeToBreakPlatform = true;
+    }
 
-    // Change level difficulty based on how far player is.
-
-    //setup Level object Assignment for this script and Player script
+    public void NotSafeToBreakPlatforms()
+    {
+        slamDetection.safeToBreakPlatform = false; // this is set once a platform is broken.
+    }
 }

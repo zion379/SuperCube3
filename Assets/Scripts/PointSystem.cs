@@ -6,6 +6,7 @@ public class PointSystem : MonoBehaviour
 {
     public int portalDestroyPoints = 10;
     public int levelCompletionPoints = 10;
+    public int destroyPlatformPoints = 10;
 
     public int playerScore = 0;
 
@@ -22,5 +23,10 @@ public class PointSystem : MonoBehaviour
     public void AddLevelCompletionPoints()
     {
         playerScore += levelCompletionPoints;
+    }
+
+    public void AddDestroyedPlatformPoints()
+    {
+        playerScore += destroyPlatformPoints;
     }
 }

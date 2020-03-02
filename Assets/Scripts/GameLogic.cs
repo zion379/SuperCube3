@@ -9,17 +9,21 @@ public class GameLogic : MonoBehaviour
 
     public SpawnEnemiesHelper spawnEnemiesHelper;
     public GameManager gameManager;
+    public LevelGeneration levelGeneration;
 
     private void Start()
     {
         spawnEnemiesHelper =  GetComponent<SpawnEnemiesHelper>();
         gameManager = GetComponent<GameManager>();
+        levelGeneration = GetComponent<LevelGeneration>();
     }
 
     private void Update()
     {
         PortalLogic();
         PlatformLogic();
+        CheckPlayerEnergy();
+
     }
 
     // Portal Logic
@@ -114,5 +118,34 @@ public class GameLogic : MonoBehaviour
             //reset enemy kills
             KilledEnemies = 0;
         } 
+    }
+
+    [Range(0, 100)]
+    public float slamEnergy = 0f;
+
+    //Player Energy Functionalities
+    public void IncreasePlayerSlamEnergy(float energy)
+    {
+        slamEnergy += energy;
+    }
+
+    public void ResetPlayerSlamEnergy()
+    {
+        slamEnergy = 0f;
+    }
+
+    public bool primedNewLevel = false;
+    public void CheckPlayerEnergy()
+    {
+        if (slamEnergy >= 100f && !primedNewLevel)
+        {
+            // generate new level (prime new level)
+            levelGeneration.PrimeNewLevel();
+            // notify level generation that a new level has been primed.
+            gameManager.SafeToBreakPlatforms();
+            primedNewLevel = true; // this reset player enters next level. by trigger.
+            Debug.Log("primed new level");
+            ResetPlayerSlamEnergy();
+        }
     }
 }

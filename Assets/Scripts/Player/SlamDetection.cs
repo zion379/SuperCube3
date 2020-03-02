@@ -11,12 +11,16 @@ public class SlamDetection : MonoBehaviour
     public GameObject DetectionTrigger;
     public Rigidbody rigidbody;
 
+    public PointSystem pointSystem;
+
     private void Start()
     {
         DetectionTrigger = GameObject.Find("SlamDetectionCylinder");
         DetectionTrigger.transform.localScale = new Vector3(scale, scale, scale);
 
         rigidbody = GetComponent<Rigidbody>();
+
+        pointSystem = GameObject.Find("GameManager").GetComponent<PointSystem>();
     }
 
     private void Update()
@@ -79,14 +83,18 @@ public class SlamDetection : MonoBehaviour
 
     }
 
-    public float breakVelThreshold = -10f;
+    public bool safeToBreakPlatform = false; // set to true in Game Manager..
     private void OnCollisionEnter(Collision collision)
     {
         
-        if (collision.transform.gameObject.layer == 12 && slaming)
+        if (collision.transform.gameObject.layer == 12 && slaming && safeToBreakPlatform) // also only spawn when next level is generated.
         {
-           Platform platform = collision.transform.gameObject.GetComponent<Platform>();
+            Platform platform = collision.transform.parent.GetComponent<Platform>();
             platform.ShatterPlatform();
+            safeToBreakPlatform = false;
+            // Reward Player for slamming
+            pointSystem.AddDestroyedPlatformPoints();
         }
+
     }
 }

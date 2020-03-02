@@ -44,12 +44,36 @@ public class LevelGeneration : MonoBehaviour
         spawnEnemiesHelper = GetComponent<SpawnEnemiesHelper>();
     }
 
+    public bool primedNewLevel = false; // this is set to true in game logic.
 
     public void GenerateNewLevel() 
     {
+        if (!primedNewLevel)
+        {
+            PrimeNewLevel();
+            primedNewLevel = false;
+        }
+        // pause enemy spawnning
+        spawnEnemiesHelper.pauseEnemySpawning = true; // this will be resumed by trigger that player has droped to the next level
+        AssignValues();
+        
+    }
+
+    public void UpdateLevelCounter()
+    {
+        levelCounter += 1; // this will update from gameManager.
+    }
+
+    public void PrimeNewLevel()
+    {
+        // UpdateLevelCounter
+        UpdateLevelCounter();
+
+        
+
         // generate new level. Using level prefab.  check to make sure level is not null
         // this function is also called from GameManager.
-        Vector3 newPosition = new Vector3(0, Y_offset, 0);
+        Vector3 newPosition = new Vector3(0, Y_offset * levelCounter, 0);
         GameObject newlevel = Instantiate(prefabLevel, newPosition, Quaternion.identity);
         string levelName = "Level" + levelCounter.ToString();
         newlevel.gameObject.name = levelName;
@@ -64,7 +88,10 @@ public class LevelGeneration : MonoBehaviour
         playerPosRight = generatedLevel.transform.Find("Platforms").transform.Find("Right").transform.Find("PlayerPosition");
         playerPosMiddle = generatedLevel.transform.Find("Platforms").transform.Find("Middle").transform.Find("PlayerPosition");
         playerPosLeft = generatedLevel.transform.Find("Platforms").transform.Find("Left").transform.Find("PlayerPosition");
+    }
 
+    public void AssignValues()
+    {
         //Setup player positions
         gameManager.player.RightPosition = playerPosRight;
         gameManager.player.MiddlePosition = playerPosMiddle;
@@ -103,11 +130,6 @@ public class LevelGeneration : MonoBehaviour
 
         //reset down platforms
         spawnEnemiesHelper.ResetDownPlatforms();
-    }
-
-    public void UpdateLevelCounter()
-    {
-        levelCounter += 1; // this will update from gameManager.
     }
 
 }

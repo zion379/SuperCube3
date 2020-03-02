@@ -24,6 +24,8 @@ public class Enemies : MonoBehaviour
 
     public float damagetoPlayer = 10f;
 
+    public float energyToPlayer = 20f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +73,7 @@ public class Enemies : MonoBehaviour
     {
         pointSystem.IncreaseScore(KillPoints);
         gameLogic.KeepTrackOfKilledEnemies();
+        gameLogic.IncreasePlayerSlamEnergy(energyToPlayer);
 
      }
 

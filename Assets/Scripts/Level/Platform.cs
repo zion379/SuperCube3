@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Platform : MonoBehaviour
 {
@@ -12,18 +13,33 @@ public class Platform : MonoBehaviour
 
     public SpawnEnemiesHelper spawnEnemiesHelper;
 
-    public MeshRenderer meshRenderer;
-    public BoxCollider boxCollider;
+    public MeshRenderer rightMeshRenderer;
+    public BoxCollider rightBoxCollider;
+
+    public MeshRenderer leftMeshRenderer;
+    public BoxCollider leftBoxCollider;
 
     public GameObject ShatteredPlatform;
+
+    public GameObject rightSectionPlatform;
+    public GameObject leftSectionPlatform;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnEnemiesHelper = GameObject.Find("GameManager").GetComponent<SpawnEnemiesHelper>();
-        meshRenderer = GetComponent<MeshRenderer>();
-        boxCollider = GetComponent<BoxCollider>();
+        rightMeshRenderer = transform.Find("Right-Side").GetComponent<MeshRenderer>();
+        rightBoxCollider = transform.Find("Right-Side").GetComponent<BoxCollider>();
+        leftMeshRenderer = transform.Find("Left-Side").GetComponent<MeshRenderer>();
+        leftBoxCollider = transform.Find("Left-Side").GetComponent<BoxCollider>();
+
+        rightSectionPlatform = GameObject.Find("Right-Side");
+        leftSectionPlatform = GameObject.Find("Left-Side");
+
+        DOTween.Init();
+
+        pulseTime = 0;
     }
 
     public void PlatformTakeDamage(float Damage) 
@@ -52,8 +68,10 @@ public class Platform : MonoBehaviour
     public void ShatterPlatform()
     {
         // turn off mesh render && turn of box collider or turn trigger on
-        meshRenderer.enabled = false;
-        boxCollider.isTrigger = true;
+        rightMeshRenderer.enabled = false;
+        rightBoxCollider.enabled = false;
+        leftMeshRenderer.enabled = false;
+        leftBoxCollider.enabled = false;
         // instantiate shattered version
         Instantiate(ShatteredPlatform, this.transform.position, Quaternion.identity);
         Debug.Log("platform");
@@ -61,12 +79,64 @@ public class Platform : MonoBehaviour
 
     // test.
     public bool Triggerbreak = false;
+    public bool TriggerPulse = false;
+
      void Update()
     {
         if (Triggerbreak)
         {
             ShatterPlatform();
             Triggerbreak = false;
+        }
+
+        if (TriggerPulse)
+        {
+            PulsePlatformOpening();
+        }
+    }
+
+    [Range(1,2)]
+    public float platformOpeningDistance = 1f;
+    [Range(1, 10)]
+    public float platformOpeningDuration = 1f;
+
+    public void OpenPlatform()
+    {
+        rightSectionPlatform.transform.DOMoveX(rightSectionPlatform.transform.position.x + platformOpeningDistance, platformOpeningDuration);
+        leftSectionPlatform.transform.DOMoveX(leftSectionPlatform.transform.position.x + (-platformOpeningDistance), platformOpeningDuration);
+    }
+
+    public void ClosePlatform()
+    {
+        rightSectionPlatform.transform.DOMoveX(rightSectionPlatform.transform.position.x + (-platformOpeningDistance), platformOpeningDuration);
+        leftSectionPlatform.transform.DOMoveX(leftSectionPlatform.transform.position.x + platformOpeningDistance, platformOpeningDuration);
+    }
+
+    [Range(1, 5)]
+    public float PulseFrequency = 2f;
+    public float pulseTime; // set in start -- temp made public
+    private bool platformOpened = false;
+    public void PulsePlatformOpening()
+    {
+        if (pulseTime <= 0)
+        {
+            if (!platformOpened)
+            {
+                // open
+                OpenPlatform();
+                platformOpened = true;
+            }
+            else
+            {
+                // close
+                ClosePlatform();
+                platformOpened = false;
+            }
+            pulseTime = PulseFrequency;
+        }
+        else
+        {
+            pulseTime -= Time.deltaTime;
         }
     }
 }

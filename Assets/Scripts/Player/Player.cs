@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
-            Debug.Log("Shooting");
         }
 
         // check id player is falling from slam
@@ -185,7 +184,7 @@ public class Player : MonoBehaviour
         rigidbody.velocity = Vector3.up * jumpVelocity;
      }
 
-    [Range(1,10)]
+    [Range(1,100)]
     public float slamForce;
 
     private void Slam() 
@@ -193,7 +192,7 @@ public class Player : MonoBehaviour
         rigidbody.velocity = Vector3.down * slamForce;
     }
 
-    [Range(-10,-4)]
+    [Range(-1,-100)]
     public float slamTriggerDetectionvalue = -4f;
     private void IsPlayerFallingFromSlam() // this will return a bool 
     {

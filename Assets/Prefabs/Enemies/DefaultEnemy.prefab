@@ -112,7 +112,13 @@ MonoBehaviour:
   KillPoints: 1
   rigidBody: {fileID: 0}
   Health: 100
+  pointSystem: {fileID: 0}
+  gameLogic: {fileID: 0}
+  player: {fileID: 0}
+  damagetoPlayer: 10
+  energyToPlayer: 100
   slamForce: 10
+  appliedDamage: 0
   portalOrigin: 2
 --- !u!54 &3919823598615077303
 Rigidbody:

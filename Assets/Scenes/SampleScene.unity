@@ -558,8 +558,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.05726231, y: 0, z: 0, w: 0.9983592}
+  m_LocalPosition: {x: 0, y: 2.06, z: -14.710001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -707,7 +707,7 @@ MonoBehaviour:
   MiddlePosition: {fileID: 0}
   LeftPosition: {fileID: 0}
   playerspeed: 1
-  moveDuration: 0.5
+  moveDuration: 0.2
   snaptonewlocation: 0
   Health: 100
   Bullet: {fileID: 143703520316214373, guid: b9fd925f4f89247b99f4761bc73a91a4, type: 3}
@@ -716,9 +716,9 @@ MonoBehaviour:
   fallmultiplier: 2.5
   lowJumpMultiplier: 1
   JumpVector: {x: 0, y: 1, z: 0}
-  jumpVelocity: 4
-  slamForce: 10
-  slamTriggerDetectionvalue: -4
+  jumpVelocity: 6
+  slamForce: 50
+  slamTriggerDetectionvalue: -20
   currentPos: 1
   RaycastDetectionDistance: 10
 --- !u!54 &1133091691
@@ -736,7 +736,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1133091692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,9 +753,10 @@ MonoBehaviour:
   slaming: 0
   DetectionTrigger: {fileID: 0}
   rigidbody: {fileID: 0}
-  RaycastDetectionDistance: 3
+  pointSystem: {fileID: 0}
+  RaycastDetectionDistance: 2.22
   BreakPlatformEnergy: 100
-  breakVelThreshold: -10
+  safeToBreakPlatform: 0
 --- !u!1 &2086366956
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,7 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManger: {fileID: 0}
   EnemySpawnRate: 2
-  pauseEnemySpawning: 1
+  pauseEnemySpawning: 0
   currentDifficulty: 0
   leftPlatformDowm: 0
   rightPlatformDown: 0
@@ -901,6 +902,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   gameLogic: {fileID: 0}
   spawnEnemiesHelper: {fileID: 0}
+  primedNewLevel: 0
 --- !u!114 &2086366962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,6 +917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalDestroyPoints: 10
   levelCompletionPoints: 10
+  destroyPlatformPoints: 10
   playerScore: 0
 --- !u!114 &2086366963
 MonoBehaviour:
@@ -928,10 +931,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6407a0535bcd6741ad1fe11bdbf599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeededEnemyKills: 10
+  NeededEnemyKills: 3
   KilledEnemies: 0
   spawnEnemiesHelper: {fileID: 0}
   gameManager: {fileID: 0}
+  levelGeneration: {fileID: 0}
+  slamEnergy: 0
+  primedNewLevel: 0
 --- !u!1001 &2072739197992268278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -939,28 +945,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2072739198444571270, guid: 287e21a2aa3144349bc14c07fecb5a93,
-        type: 3}
-      propertyPath: ShatteredPlatform
-      value: 
-      objectReference: {fileID: 7584217588048398984, guid: e9645db107c2ff641b642b024acb0fc7,
-        type: 3}
-    - target: {fileID: 2072739198444571293, guid: 287e21a2aa3144349bc14c07fecb5a93,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2072739198526872416, guid: 287e21a2aa3144349bc14c07fecb5a93,
-        type: 3}
-      propertyPath: ShatteredPlatform
-      value: 
-      objectReference: {fileID: 7584217588048398984, guid: e9645db107c2ff641b642b024acb0fc7,
-        type: 3}
-    - target: {fileID: 2072739198526872423, guid: 287e21a2aa3144349bc14c07fecb5a93,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 2072739198901619016, guid: 287e21a2aa3144349bc14c07fecb5a93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1020,17 +1004,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level
-      objectReference: {fileID: 0}
-    - target: {fileID: 2072739199117110017, guid: 287e21a2aa3144349bc14c07fecb5a93,
-        type: 3}
-      propertyPath: ShatteredPlatform
-      value: 
-      objectReference: {fileID: 7584217588048398984, guid: e9645db107c2ff641b642b024acb0fc7,
-        type: 3}
-    - target: {fileID: 2072739199117110020, guid: 287e21a2aa3144349bc14c07fecb5a93,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 287e21a2aa3144349bc14c07fecb5a93, type: 3}
