@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
          }
     }
 
-    private void MoveRight() 
+    public void MoveRight() 
     {
         if(currentPos == PlayerPos.left && CheckPosExist()) 
         {
@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void MoveLeft()
+    public void MoveLeft()
     {
         if (currentPos == PlayerPos.right && CheckPosExist())
         {
@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private void Jump() 
+    public void Jump() 
     {
         rigidbody.velocity = Vector3.up * jumpVelocity;
      }
@@ -187,14 +187,14 @@ public class Player : MonoBehaviour
     [Range(1,100)]
     public float slamForce;
 
-    private void Slam() 
+    public void Slam() 
     {
         rigidbody.velocity = Vector3.down * slamForce;
     }
 
     [Range(-1,-100)]
     public float slamTriggerDetectionvalue = -4f;
-    private void IsPlayerFallingFromSlam() // this will return a bool 
+    public void IsPlayerFallingFromSlam() // this will return a bool 
     {
         if (rigidbody.velocity.y <= slamTriggerDetectionvalue) 
         {
@@ -206,7 +206,7 @@ public class Player : MonoBehaviour
          }
     }
 
-    private void Shoot() 
+    public void Shoot() 
     {
         Vector3 newBulletPos = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
         Instantiate(Bullet, newBulletPos, transform.rotation);
