@@ -145,4 +145,22 @@ public class GameManager : MonoBehaviour
     {
         slamDetection.safeToBreakPlatform = false; // this is set once a platform is broken.
     }
+
+    // Manage how many levels are in the scene
+    public int maxLevelsInScene = 3;
+    public void ManageHowManyLevelsAreInScene() // ran from level generation
+    {
+        if (currentLevel >= maxLevelsInScene)
+        {
+            int levelToDestroy = currentLevel - maxLevelsInScene;
+            if (levelToDestroy == 0)
+            {
+                Destroy(GameObject.Find("Level"));
+            }
+            else
+            {
+                Destroy(GameObject.Find("Level" + levelToDestroy));
+            }
+        }
+    }
 }

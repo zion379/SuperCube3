@@ -61,6 +61,7 @@ public class LevelGeneration : MonoBehaviour
     {
         levelCounter += 1; // this will update from gameManager.
         gameManager.currentLevel = levelCounter;
+        gameManager.ManageHowManyLevelsAreInScene();
     }
 
     public void PrimeNewLevel()

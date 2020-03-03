@@ -558,8 +558,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.05726231, y: 0, z: 0, w: 0.9983592}
-  m_LocalPosition: {x: 0, y: 2.06, z: -14.710001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -813,6 +813,7 @@ MonoBehaviour:
   currentDifficulty: 0
   levelGeneration: {fileID: 0}
   currentLevel: 0
+  maxLevelsInScene: 4
 --- !u!4 &2086366958
 Transform:
   m_ObjectHideFlags: 0
@@ -931,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6407a0535bcd6741ad1fe11bdbf599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeededEnemyKills: 3
+  NeededEnemyKills: 2
   KilledEnemies: 0
   spawnEnemiesHelper: {fileID: 0}
   gameManager: {fileID: 0}
