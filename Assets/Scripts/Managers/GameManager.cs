@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     SlamDetection slamDetection;
 
+    public int currentLevel = 0;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -79,16 +81,6 @@ public class GameManager : MonoBehaviour
 
         //Get slam detection from player gameobject
         slamDetection = GameObject.Find("Player").GetComponent<SlamDetection>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // update score
-    }
-
-    void FixedUpdate()
-    {
     }
 
     public void playerDied() 

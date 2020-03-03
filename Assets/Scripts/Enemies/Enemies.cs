@@ -26,6 +26,8 @@ public class Enemies : MonoBehaviour
 
     public float energyToPlayer = 20f;
 
+    public int BelongsToLevel = 0; // this is the level an enemy was created in.
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,23 +42,25 @@ public class Enemies : MonoBehaviour
 
         gameLogic = GameObject.Find("GameManager").GetComponent<GameLogic>();
 
-        if(gameManager.playerDead != true)
+        if (gameManager.playerDead != true)
         {
             player = GameObject.Find("Player").GetComponent<Player>();
         }
+
+        BelongsToLevel = gameManager.currentLevel;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
     {
         moveEnemyFoward();
     }
-    public void Explode() 
+    public void Explode()
     {
         // this can be called from other scripts
         //Play Exploding animation
@@ -69,31 +73,31 @@ public class Enemies : MonoBehaviour
 
     // detect collision with end of platform then explode
 
-    private void IncreasePlayerScore() 
+    private void IncreasePlayerScore()
     {
         pointSystem.IncreaseScore(KillPoints);
         gameLogic.KeepTrackOfKilledEnemies();
         gameLogic.IncreasePlayerSlamEnergy(energyToPlayer);
 
-     }
+    }
 
-    private void moveEnemyFoward() 
+    private void moveEnemyFoward()
     {
         Vector3 foward = new Vector3(0, 0, -1);
         rigidBody.AddForce(foward * EnemySpeed);
-     }
+    }
 
-    public void takeDamage(float damage) 
+    public void takeDamage(float damage)
     {
         Health -= damage;
-        if(Health <= 0) 
+        if (Health <= 0)
         {
             IncreasePlayerScore();
             Die();
-         }
+        }
     }
 
-    [Range(1,10)]
+    [Range(1, 10)]
     public float slamForce = 1f;
     public void DieFromSlam()
     {
@@ -101,7 +105,7 @@ public class Enemies : MonoBehaviour
         Destroy(this.gameObject, 1f);
     }
 
-    public void Die() 
+    public void Die()
     {
         // Play Death Animation
         Destroy(this.gameObject, .5f); // make sure to add in wait time later.
@@ -129,7 +133,20 @@ public class Enemies : MonoBehaviour
         }
     }
 
-    public enum PortalOrigins  {left, right, middle}
+    public enum PortalOrigins { left, right, middle }
     public PortalOrigins portalOrigin = PortalOrigins.middle; // portal origins are set when enemy is created from GameManager 
     // portal Origin is set in GameManager when enemy is created.
+
+    public bool EnemyBelongsInCurrentLevel() // this will be called by the platform trigger
+    {
+        if (BelongsToLevel != gameManager.currentLevel)
+        {
+            // enemy should not affect current level.
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

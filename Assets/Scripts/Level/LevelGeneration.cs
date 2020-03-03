@@ -44,14 +44,12 @@ public class LevelGeneration : MonoBehaviour
         spawnEnemiesHelper = GetComponent<SpawnEnemiesHelper>();
     }
 
-    public bool primedNewLevel = false; // this is set to true in game logic.
-
     public void GenerateNewLevel() 
     {
-        if (!primedNewLevel)
+        if (!gameLogic.primedNewLevel)
         {
             PrimeNewLevel();
-            primedNewLevel = false;
+            gameLogic.primedNewLevel = false;
         }
         // pause enemy spawnning
         spawnEnemiesHelper.pauseEnemySpawning = true; // this will be resumed by trigger that player has droped to the next level
@@ -62,6 +60,7 @@ public class LevelGeneration : MonoBehaviour
     public void UpdateLevelCounter()
     {
         levelCounter += 1; // this will update from gameManager.
+        gameManager.currentLevel = levelCounter;
     }
 
     public void PrimeNewLevel()

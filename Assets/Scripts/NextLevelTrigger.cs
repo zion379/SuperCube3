@@ -21,7 +21,6 @@ public class NextLevelTrigger : MonoBehaviour
             levelGeneration.AssignValues();
             spawnEnemiesHelper.pauseEnemySpawning = false;
             gameLogic.primedNewLevel = false;
-            Debug.Log("player hit Next Level Trigger");
         }
     }
 }

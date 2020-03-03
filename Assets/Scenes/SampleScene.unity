@@ -812,6 +812,7 @@ MonoBehaviour:
   gameOver: 0
   currentDifficulty: 0
   levelGeneration: {fileID: 0}
+  currentLevel: 0
 --- !u!4 &2086366958
 Transform:
   m_ObjectHideFlags: 0
@@ -902,7 +903,6 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   gameLogic: {fileID: 0}
   spawnEnemiesHelper: {fileID: 0}
-  primedNewLevel: 0
 --- !u!114 &2086366962
 MonoBehaviour:
   m_ObjectHideFlags: 0

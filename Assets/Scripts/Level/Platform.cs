@@ -34,8 +34,8 @@ public class Platform : MonoBehaviour
         leftMeshRenderer = transform.Find("Left-Side").GetComponent<MeshRenderer>();
         leftBoxCollider = transform.Find("Left-Side").GetComponent<BoxCollider>();
 
-        rightSectionPlatform = GameObject.Find("Right-Side");
-        leftSectionPlatform = GameObject.Find("Left-Side");
+        rightSectionPlatform = transform.Find("Right-Side").gameObject;
+        leftSectionPlatform = transform.Find("Left-Side").gameObject;
 
         DOTween.Init();
 
