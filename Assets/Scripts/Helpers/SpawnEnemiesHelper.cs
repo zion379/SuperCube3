@@ -130,7 +130,7 @@ public class SpawnEnemiesHelper : MonoBehaviour
     }
 
     public int[] LastTwoSpawnedPositions = new int[2] { 0, 0 }; //keeps track of last two positions
-    public GameObject EnemyPrefab;
+    public GameObject[] EnemyPrefabs;
     private void RandomlyAssignEnemyPositions(float EnemySpeed, float SpawnSpeed)
     {   
         // check to make sure all platforms are not down. And portals...
@@ -182,26 +182,50 @@ public class SpawnEnemiesHelper : MonoBehaviour
             if (newSpawnPosition == 1)
             {
                 UpdateLastPosition(1);
-                GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyLeftSpawn, false);
+                GameObject Instatiated = Instantiate(ReturnRandomEnemy(), gameManger.EnemyLeftSpawn, false);
                 // set enemy portal origin
                 Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.left;
             }
             else if (newSpawnPosition == 2)
             {
                 UpdateLastPosition(2);
-                GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyMiddleSpawn, false);
+                GameObject Instatiated = Instantiate(ReturnRandomEnemy(), gameManger.EnemyMiddleSpawn, false);
                 // set enemy portal origin
                 Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.middle;
             }
             else if (newSpawnPosition == 3)
             {
                 UpdateLastPosition(3);
-                GameObject Instatiated = Instantiate(EnemyPrefab, gameManger.EnemyRightSpawn, false);
+                GameObject Instatiated = Instantiate(ReturnRandomEnemy(), gameManger.EnemyRightSpawn, false);
                 // set enemy portal origin
                 Instatiated.gameObject.GetComponent<Enemies>().portalOrigin = Enemies.PortalOrigins.right;
             }
         }
     }
+
+    GameObject ReturnRandomEnemy()
+    {
+        int enemy = Random.RandomRange(1, 4);
+
+        if (enemy == 1)
+        {
+            return EnemyPrefabs[0];
+        }
+        else if (enemy == 2)
+        {
+            return EnemyPrefabs[1];
+        }
+        else if (enemy == 3)
+        {
+            return EnemyPrefabs[2];
+        }
+        else
+        {
+            return EnemyPrefabs[0];
+        }
+    }
+
+    // create function that spawn enemies based off of difficulty.
 
     private int posCounter = 0;
     private void UpdateLastPosition(int pos)
