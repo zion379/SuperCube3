@@ -206,10 +206,12 @@ public class Player : MonoBehaviour
          }
     }
 
+    public float bulletSpeed = 10f;
     public void Shoot() 
     {
         Vector3 newBulletPos = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-        Instantiate(Bullet, newBulletPos, transform.rotation);
+        GameObject bullet = Instantiate(Bullet, newBulletPos, transform.rotation);
+        bullet.GetComponent<Bullet>().Speed = bulletSpeed;
      }
 
     private void TweenMove(Vector3 Startpos, Vector3 Endpos) 

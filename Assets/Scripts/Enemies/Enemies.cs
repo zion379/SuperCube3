@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Enemies : MonoBehaviour
 {
@@ -48,12 +49,29 @@ public class Enemies : MonoBehaviour
         }
 
         BelongsToLevel = gameManager.currentLevel;
+
+        pulseTime = 0;
+
+        if (enemyType == EnemyTypes.snake)
+        {
+            int startDirection = Random.Range(1, 3);
+            switch (startDirection)
+            {
+                case 1:
+                    positionCounter = 1;
+                    Debug.Log("move right");
+                    break;
+                case 2: positionCounter = 4;
+                    Debug.Log("move left");
+                    break;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        EnemyTypeMovement();
     }
 
     private void FixedUpdate()
@@ -149,4 +167,119 @@ public class Enemies : MonoBehaviour
             return true;
         }
     }
+
+    // Diffrent Enemy Types
+    public enum EnemyTypes {normal, flying, snake}
+    public EnemyTypes enemyType = EnemyTypes.normal;
+
+    void EnemyTypeMovement()
+    {
+        switch (enemyType)
+        {
+            case EnemyTypes.normal:
+                break;
+            case EnemyTypes.flying:
+                flying();
+                break;
+            case EnemyTypes.snake:
+                snake();
+                break;
+        }
+    }
+
+    [Range(0,5)]
+    public float PulseFrequency = 2f;
+    private float pulseTime; // set in start.
+    private bool halfcycleCompleted = false;
+
+    [Range(1, 10)]
+    public float flyingDistance = 4f;
+    [Range(1, 10)]
+    public float flyingDuration = 1f;
+    void flying()
+    {
+        if (pulseTime <= 0)
+        {
+            if (!halfcycleCompleted)
+            {
+                halfcycleCompleted = true;
+                flyup();
+            }
+            else
+            {
+                halfcycleCompleted = false;
+                flydown();
+            }
+            pulseTime = PulseFrequency;
+        }
+        else
+        {
+            pulseTime -= Time.deltaTime;
+        }
+    }
+
+    public void flyup()
+    {
+        this.transform.DOMoveY(this.transform.position.y + (flyingDistance / 2), (flyingDuration / 2));
+    }
+
+    public void flydown()
+    {
+        this.transform.DOMoveY(this.transform.position.y - (flyingDistance / 2), (flyingDuration / 2));
+    }
+
+    [Range(1, 10)]
+    public float snakedistance = 4f;
+    [Range(1, 10)]
+    public float snakeduration = 1f;
+    //int location 1 ==left // 2 == middle 3
+    private int positionCounter = 1; // middle
+    void snake()
+    {
+        if (pulseTime <= 0)
+        {
+            // hardcoded zig zag
+            switch (positionCounter)
+            {
+                case 1:
+                    // middle
+                    break;
+                case 2:
+                    // right -->
+                    moveRight();
+                    break;
+                case 3:
+                    // left to middle <--
+                    moveLeft();
+                    break;
+                case 4:
+                    // left from middle to left <--
+                    moveLeft();
+                    break;
+                case 5:
+                    // right to middle -->
+                    moveRight();
+                    positionCounter = 1;
+                    break;
+            }
+            positionCounter += 1;
+            pulseTime = PulseFrequency;
+        }
+        else
+        {
+            pulseTime -= Time.deltaTime;
+        }
+    }
+
+    void moveRight()
+    {
+        this.transform.DOMoveX(this.transform.position.x + (snakedistance / 2), (snakeduration / 4));
+    }
+
+    void moveLeft()
+    {
+        this.transform.DOMoveX(this.transform.position.x - (snakedistance / 2), (snakeduration / 4));
+    }
+
+
 }
