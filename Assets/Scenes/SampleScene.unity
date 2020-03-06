@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1.0600001, z: -9.210001}
+  m_FollowOffset: {x: 0, y: 1.45, z: -13.54}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: 0.57, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
   m_HorizontalDamping: 0.5
@@ -283,7 +283,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 5.217e-42, y: 0, z: 0, w: NaN}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -400,8 +400,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954041353}
-  m_LocalRotation: {x: 0.05726231, y: 0, z: 0, w: 0.9983592}
-  m_LocalPosition: {x: 0, y: 2.06, z: -14.710001}
+  m_LocalRotation: {x: 0.03243629, y: 0, z: 0, w: 0.99947387}
+  m_LocalPosition: {x: 0, y: 2.45, z: -25.380001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 526964256}
@@ -485,8 +485,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.05726231, y: 0, z: 0, w: 0.9983592}
-  m_LocalPosition: {x: 0, y: 2.06, z: -14.710001}
+  m_LocalRotation: {x: 0.03243629, y: 0, z: 0, w: 0.99947387}
+  m_LocalPosition: {x: 0, y: 2.45, z: -25.380001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabLevel: {fileID: 1456765117}
-  Y_offset: -12
+  Y_offset: -25
   enemyRightSpawn: {fileID: 0}
   enemyMiddleSpawn: {fileID: 0}
   enemyLeftSpawn: {fileID: 0}
@@ -876,7 +876,7 @@ PrefabInstance:
     - target: {fileID: 6877208501765627936, guid: 3df6180d9a2733445a17b5d7f4e24f23,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.5
+      value: -11.84
       objectReference: {fileID: 0}
     - target: {fileID: 6877208501765627936, guid: 3df6180d9a2733445a17b5d7f4e24f23,
         type: 3}
