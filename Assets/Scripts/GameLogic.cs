@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameLogic : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GameLogic : MonoBehaviour
         PortalLogic();
         PlatformLogic();
         CheckPlayerEnergy();
+        updateSlamUI();
 
     }
 
@@ -147,5 +149,14 @@ public class GameLogic : MonoBehaviour
             Debug.Log("primed new level");
             ResetPlayerSlamEnergy();
         }
+    }
+
+    public float SlamMeterHeight = 60f;
+    public RectTransform Meter;
+    public void updateSlamUI()
+    {
+        // get ratio
+        float newHeightRatio = slamEnergy / 100;
+        Meter.DOScaleX(SlamMeterHeight * newHeightRatio, 1f);
     }
 }

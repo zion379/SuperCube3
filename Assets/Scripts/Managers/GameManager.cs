@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     SlamDetection slamDetection;
 
+    SpawnEnemiesHelper spawnEnemiesHelper;
+
     public int currentLevel = 0;
 
     // Start is called before the first frame update
@@ -81,6 +83,29 @@ public class GameManager : MonoBehaviour
 
         //Get slam detection from player gameobject
         slamDetection = GameObject.Find("Player").GetComponent<SlamDetection>();
+
+        spawnEnemiesHelper = GetComponent<SpawnEnemiesHelper>();
+        spawnEnemiesHelper.pauseEnemySpawning = true;
+    }
+
+    public void StartGame()
+    {
+        spawnEnemiesHelper.pauseEnemySpawning = false;
+    }
+
+    public void pauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void resumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void restartGame()
+    {
+
     }
 
     public void playerDied() 
