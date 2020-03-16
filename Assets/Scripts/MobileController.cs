@@ -20,9 +20,14 @@ public class MobileController : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Player>();
     }
 
+    public bool detectSwipes = false;
+
     void Update()
     {
-        GetSwipeDistance();
+        if (detectSwipes)
+        {
+            GetSwipeDistance();
+        }
     }
 
     private void GetSwipeDistance()

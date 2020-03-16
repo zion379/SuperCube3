@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     SpawnEnemiesHelper spawnEnemiesHelper;
 
+    public MobileController mobileController;
+
     public int currentLevel = 0;
 
     // Start is called before the first frame update
@@ -86,21 +88,26 @@ public class GameManager : MonoBehaviour
 
         spawnEnemiesHelper = GetComponent<SpawnEnemiesHelper>();
         spawnEnemiesHelper.pauseEnemySpawning = true;
+
+        mobileController = GameObject.Find("MobileController").GetComponent<MobileController>();
     }
 
     public void StartGame()
     {
         spawnEnemiesHelper.pauseEnemySpawning = false;
+        mobileController.detectSwipes = true;
     }
 
     public void pauseGame()
     {
         Time.timeScale = 0;
+        mobileController.detectSwipes = false;
     }
 
     public void resumeGame()
     {
         Time.timeScale = 1;
+        mobileController.detectSwipes = true;
     }
 
     public void restartGame()
@@ -112,6 +119,7 @@ public class GameManager : MonoBehaviour
     {
         //Trigger Game Over
         playerDead = true;
+        mobileController.detectSwipes = false;
     }
 
     public void GameOverFromDestroyedPlatforms()
