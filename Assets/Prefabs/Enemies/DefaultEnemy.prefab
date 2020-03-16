@@ -116,10 +116,17 @@ MonoBehaviour:
   gameLogic: {fileID: 0}
   player: {fileID: 0}
   damagetoPlayer: 10
-  energyToPlayer: 100
+  energyToPlayer: 10
+  BelongsToLevel: 0
   slamForce: 10
   appliedDamage: 0
   portalOrigin: 2
+  enemyType: 0
+  PulseFrequency: 2
+  flyingDistance: 4
+  flyingDuration: 1
+  snakedistance: 4
+  snakeduration: 1
 --- !u!54 &3919823598615077303
 Rigidbody:
   m_ObjectHideFlags: 0
