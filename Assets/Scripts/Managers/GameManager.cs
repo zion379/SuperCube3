@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,6 +44,10 @@ public class GameManager : MonoBehaviour
     SpawnEnemiesHelper spawnEnemiesHelper;
 
     public MobileController mobileController;
+
+    public UIManager uiManager;
+
+    public PointSystem pointSystem;
 
     public int currentLevel = 0;
 
@@ -90,49 +95,60 @@ public class GameManager : MonoBehaviour
         spawnEnemiesHelper.pauseEnemySpawning = true;
 
         mobileController = GameObject.Find("MobileController").GetComponent<MobileController>();
+
+        uiManager = FindFirstObjectByType<UIManager>();
+        pointSystem = GetComponent<PointSystem>();
     }
 
     public void StartGame()
     {
         spawnEnemiesHelper.pauseEnemySpawning = false;
         mobileController.detectSwipes = true;
+        uiManager.CloseMainMenu();
+        uiManager.ShowInGamePanel();
     }
 
     public void pauseGame()
     {
         Time.timeScale = 0;
         mobileController.detectSwipes = false;
+        uiManager.showPausePanel();
     }
 
     public void resumeGame()
     {
         Time.timeScale = 1;
         mobileController.detectSwipes = true;
+        uiManager.hidePausePanel();
     }
 
     public void restartGame()
     {
-
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void playerDied() 
+    public void playerDied()
     {
-        //Trigger Game Over
         playerDead = true;
         mobileController.detectSwipes = false;
+        TriggerGameOver();
     }
 
     public void GameOverFromDestroyedPlatforms()
     {
-        if(!gameOver)
+        if (!gameOver)
         {
-            // this is called from GameLogic.
-            Debug.Log("Game Over from destroyed platforms");
-            // update ui 
-            // load up game over menu.
-            // camera should no longer follow player -- let player fall off screen.
             gameOver = true;
+            TriggerGameOver();
         }
+    }
+
+    private void TriggerGameOver()
+    {
+        spawnEnemiesHelper.pauseEnemySpawning = true;
+        uiManager.HideInGamePanel();
+        uiManager.ShowGameOverPanel(pointSystem.playerScore);
     }
 
     // reset gameOver
@@ -144,7 +160,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        /// set in other scripts that game is opver and bring up gameover ui.
+        TriggerGameOver();
     }
 
     public void DropPlayerToNextLevel()

@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         //play players death animation
         Debug.Log("Player is dead");
         gameManager.playerDied();
-        this.gameObject.active = false;
+        this.gameObject.SetActive(false);
      }
 
     public void TakeDamage(float damageAmount) 

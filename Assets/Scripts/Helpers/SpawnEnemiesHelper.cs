@@ -205,7 +205,7 @@ public class SpawnEnemiesHelper : MonoBehaviour
 
     GameObject ReturnRandomEnemy()
     {
-        int enemy = Random.RandomRange(1, 4);
+        int enemy = Random.Range(1, 4);
 
         if (enemy == 1)
         {

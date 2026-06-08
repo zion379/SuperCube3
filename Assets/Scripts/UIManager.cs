@@ -6,87 +6,102 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    // game over panel
+    public GameObject GameOverPanel;
+    public TMP_Text FinalScoreText;
+
+    public void ShowGameOverPanel(int score)
+    {
+        FinalScoreText.text = "Score: " + score.ToString();
+        GameOverPanel.SetActive(true);
+    }
+
+    public void HideGameOverPanel()
+    {
+        GameOverPanel.SetActive(false);
+    }
+
     // main menu
     public GameObject MainMenuPanel;
     public void CloseMainMenu()
     {
-        MainMenuPanel.active = false;
+        MainMenuPanel.SetActive(false);
     }
 
     public void OpenMainMenu()
     {
-        MainMenuPanel.active = true;
+        MainMenuPanel.SetActive(true);
     }
 
     //In game panel
     public GameObject InGamePanel;
     public void ShowInGamePanel()
     {
-        InGamePanel.active = true;
+        InGamePanel.SetActive(true);
     }
 
     public void HideInGamePanel()
     {
-        InGamePanel.active = false;
+        InGamePanel.SetActive(false);
     }
 
     //pause panel
     public GameObject pausePanel;
     public void showPausePanel()
     {
-        pausePanel.active = true;
+        pausePanel.SetActive(true);
     }
 
     public void hidePausePanel()
     {
-        pausePanel.active = false;
+        pausePanel.SetActive(false);
     }
 
     //settings panel
     public GameObject settingsPanel;
     public void showSettingsPanel()
     {
-        settingsPanel.active = true;
+        settingsPanel.SetActive(true);
     }
 
     public void hideSettingsPanel()
     {
-        settingsPanel.active = false;
+        settingsPanel.SetActive(false);
     }
 
     //LeaderBoard Panel
     public GameObject leaderBoardPanel;
     public void showLeaderBoardPanel()
     {
-        leaderBoardPanel.active = true;
+        leaderBoardPanel.SetActive(true);
     }
 
     public void hideLeaderBoardPanel()
     {
-        leaderBoardPanel.active = false;
+        leaderBoardPanel.SetActive(false);
     }
 
     //playerCustomization Panel
     public GameObject playerCustomizationPanel;
     public void showPlayerCustumizationPanel()
     {
-        playerCustomizationPanel.active = true;
+        playerCustomizationPanel.SetActive(true);
     }
 
     public void hidePlayerCustumizationPanel()
     {
-        playerCustomizationPanel.active = false;
+        playerCustomizationPanel.SetActive(false);
     }
 
     //Levels Menu Panel
     public GameObject LevelsMenuPanel;
     public void showLevelsMenuPanel()
     {
-        LevelsMenuPanel.active = true;
+        LevelsMenuPanel.SetActive(true);
     }
 
     public void hideLevelsMenuPanel()
     {
-        LevelsMenuPanel.active = false;
+        LevelsMenuPanel.SetActive(false);
     }
 }
